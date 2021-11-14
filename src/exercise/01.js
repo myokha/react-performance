@@ -7,11 +7,8 @@ import Spinner from '@atlaskit/spinner'
 
 // 🐨 use React.lazy to create a Globe component which uses a dynamic import
 // to get the Globe component from the '../globe' module.
-function loadGlobe() {
-  return import('../globe')
-}
 
-const Globe = React.lazy(loadGlobe)
+const Globe = React.lazy(() => import(/* webpackPrefetch: true */ '../globe'))
 
 function App() {
   const [showGlobe, setShowGlobe] = React.useState(false)
@@ -31,7 +28,7 @@ function App() {
         padding: '2rem',
       }}
     >
-      <label style={{marginBottom: '1rem'}} onMouseOver={() => loadGlobe()}>
+      <label style={{marginBottom: '1rem'}}>
         <input
           type="checkbox"
           checked={showGlobe}
